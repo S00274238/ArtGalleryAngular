@@ -3,12 +3,14 @@ export interface Art {
   name: string;
   genre: string;
   year: number;
+  imageUrl?: string;
 }
 
 export interface CreateArtDto {
   name: string;
   genre: string;
   year?: number;
+  imageUrl?: string;
 }
 
 export interface UpdateArtDto {

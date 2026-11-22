@@ -1,8 +1,10 @@
-<div class="art">
+<div class="art-block">
     <h3>{{ art().name }} {{ art().genre }}</h3>
 
     @if(art().year){ <p>Year: {{ art().year }}</p>}
 
+    <img src="{{art().imageUrl}}" alt="popa" width="200px" height="200px"><br>
     <a [routerLink]="['/arts', art()._id]">View Profile</a>
+    
 
 </div>

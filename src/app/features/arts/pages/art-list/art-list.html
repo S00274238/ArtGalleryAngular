@@ -1,0 +1,18 @@
+<div class="art-list-container">
+  <h2>Art Gallery</h2>
+
+  @let s = state();
+  @if (s.status === 'loading') {
+    <p>Loading arts...</p>
+  } @else if (s.status === 'error') {
+    <p> {{ s.message }}</p>
+  } @else if (s.data.length === 0) {
+    <p>No artss available at the moment.</p>
+  } @else {
+    <div class="grid">
+      @for (art of s.data; track art._id) {
+        <app-art-card [art]="art" />
+      }
+    </div>
+  }
+</div>

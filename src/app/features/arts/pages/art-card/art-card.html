@@ -1,0 +1,8 @@
+<div class="art">
+    <h3>{{ art().name }} {{ art().genre }}</h3>
+
+    @if(art().year){ <p>Year: {{ art().year }}</p>}
+
+    <a [routerLink]="['/arts', art()._id]">View Profile</a>
+
+</div>

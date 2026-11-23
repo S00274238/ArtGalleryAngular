@@ -1,75 +1,80 @@
-<form [formGroup]="artForm" (ngSubmit)="onSubmit()" class="art-form">
-    <h2>Art Details Form</h2>
+﻿<section class="page">
+    <form [formGroup]="artForm" (ngSubmit)="onSubmit()" class="art-form">
+        <h1>{{ id() ? "Edit artwork" : "Add artwork" }}</h1>
 
-    @if (saving()) {
-    <mat-progress-bar mode="buffer" />
-    }
-
-
-
-    <mat-form-field appearance="outline">
-        <mat-label>Name</mat-label>
-        <input matInput formControlName="name" placeholder="e.g. Toyota" />
-
-        @if (artForm.controls.name.hasError('required')) {
-        <mat-error>Name is required</mat-error>
-        } @else if (artForm.controls.name.hasError('minlength')) {
-        <mat-error>Name must be at least 2 characters</mat-error>
-        } @else if (artForm.controls.name.hasError('maxlength')) {
-        <mat-error>Name must be 30 characters or fewer</mat-error>
-        }@if (artForm.controls.name.hasError('blank')) {
-        <mat-error>Name cannot be only spaces</mat-error>
-        }
-        @if (artForm.controls.name.hasError('forbidden')) {
-        <mat-error>Name cannot be "ban"</mat-error>
+        @if (saving()) {
+        <mat-progress-bar mode="buffer" />
         }
 
+        <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" placeholder="e.g. Evening Study" />
 
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-        <mat-label>Genre</mat-label>
-        <input matInput formControlName="genre" placeholder="e.g. Corolla" />
-        @if (artForm.controls.genre.hasError('required')) {
-        <mat-error>Genre is required</mat-error>
-        } @else if (artForm.controls.genre.hasError('minlength')) {
-        <mat-error>Genre must be at least 2 characters</mat-error>
-        } @else if (artForm.controls.genre.hasError('maxlength')) {
-        <mat-error>Genre must be 30 characters or fewer</mat-error>
-        }
-        @if (artForm.controls.genre.hasError('blank')) {
-        <mat-error>Genre cannot be only spaces</mat-error>
-        }
-        @if (artForm.controls.genre.hasError('forbidden')) {
-        <mat-error>Genre cannot be "ban"</mat-error>
-        }
+            @if (artForm.controls.name.hasError('required')) {
+            <mat-error>Name is required</mat-error>
+            } @else if (artForm.controls.name.hasError('minlength')) {
+            <mat-error>Name must be at least 2 characters</mat-error>
+            } @else if (artForm.controls.name.hasError('maxlength')) {
+            <mat-error>Name must be 30 characters or fewer</mat-error>
+            }@if (artForm.controls.name.hasError('blank')) {
+            <mat-error>Name cannot be only spaces</mat-error>
+            }
+            @if (artForm.controls.name.hasError('forbidden')) {
+            <mat-error>Name cannot be "ban"</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Genre</mat-label>
+            <input matInput formControlName="genre" placeholder="e.g. Landscape" />
+            @if (artForm.controls.genre.hasError('required')) {
+            <mat-error>Genre is required</mat-error>
+            } @else if (artForm.controls.genre.hasError('minlength')) {
+            <mat-error>Genre must be at least 2 characters</mat-error>
+            } @else if (artForm.controls.genre.hasError('maxlength')) {
+            <mat-error>Genre must be 30 characters or fewer</mat-error>
+            }
+            @if (artForm.controls.genre.hasError('blank')) {
+            <mat-error>Genre cannot be only spaces</mat-error>
+            }
+            @if (artForm.controls.genre.hasError('forbidden')) {
+            <mat-error>Genre cannot be "ban"</mat-error>
+            }
 
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-        <mat-label>Year</mat-label>
-        <input matInput type="number" formControlName="year" placeholder="e.g. 2022" />
-        <mat-hint>Optional</mat-hint>
-        @if (artForm.controls.year.hasError('min')) {
-        <mat-error>Year must be 1950 or later</mat-error>
-        } @else if (artForm.controls.year.hasError('max')) {
-        <mat-error>Year must be in the future</mat-error>
-        }
-    </mat-form-field>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Year</mat-label>
+            <input matInput type="number" formControlName="year" placeholder="e.g. 2022" />
+            <mat-hint>Optional</mat-hint>
+            @if (artForm.controls.year.hasError('min')) {
+            <mat-error>Year must be 1950 or later</mat-error>
+            } @else if (artForm.controls.year.hasError('max')) {
+            <mat-error>Year cannot be later than {{ currentYear + 1 }}</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>ImageUrl</mat-label>
+            <input matInput type="string" formControlName="imageUrl" placeholder="e.g. 2022" />
+            <mat-hint>Optional</mat-hint>
+            @if (artForm.controls.genre.hasError('blank')) {
+            <mat-error>Genre cannot be only spaces</mat-error>
+            }
+        </mat-form-field>
 
 
 
 
 
-    <!-- Action Buttons -->
-    @if (saveError(); as message) { <p role="alert">{{ message }}</p> }
-    <div class="button-group">
-        <button matButton="filled" type="submit" [disabled]="saving()">
-            {{ saving() ? 'Saving...' : 'Save art' }}
-        </button>
-        <a matButton routerLink="/arts">Cancel</a>
-    </div>
 
 
+        <!-- Action Buttons -->
+        @if (saveError(); as message) { <p class="error" role="alert">{{ message }}</p> }
+        <div class="button-group">
+            <button matButton="filled" type="submit" [disabled]="saving()">
+                {{ saving() ? 'Saving...' : 'Save art' }}
+            </button>
+            <a matButton routerLink="/arts">Cancel</a>
+        </div>
 
-
-
-</form>
+    </form>
+</section>

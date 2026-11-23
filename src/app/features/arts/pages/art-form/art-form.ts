@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { notBlank } from '../../../../shared/validators/not-blank.validator';
 import { forbiddenValue } from '../../../../shared/validators/forbiden-value';
 
+
 @Component({
   selector: 'app-art-form',
   imports: [ReactiveFormsModule, RouterLink, MatButtonModule,
@@ -31,17 +32,36 @@ export class ArtForm implements OnInit {
 
 
   readonly id = input<string>();  // note this is optional by default
+  
   readonly currentYear = new Date().getFullYear();
 
   artForm = this.formBuilder.nonNullable.group({
     name: ['', [Validators.required, Validators.minLength(2), notBlank, forbiddenValue]],
     genre: ['', [Validators.required, Validators.minLength(2), notBlank, forbiddenValue]],
     year: this.formBuilder.control<number | null>(null, [Validators.min(1950), Validators.max(this.currentYear + 1),]),
+    imageUrl: ['', Validators.required, notBlank]
   });
 
 
   saving = signal(false);
   saveError = signal<string | null>(null);
+
+  imageUrl: string = '';
+
+  // onImageSelected(event: Event) {
+  //   const input = event.target as HTMLInputElement;
+  //   const file = input.files?.[0];
+
+  //   if (!file) return;
+
+  //   const reader = new FileReader();
+
+  //   reader.onload = () => {
+  //     this.imageUrl = reader.result as string;
+  //   };
+
+  //   reader.readAsDataURL(file);
+  // }
 
 
 
@@ -51,8 +71,15 @@ export class ArtForm implements OnInit {
       this.artForm.markAllAsTouched();
       return;
     }
-    const { name, genre, year } = this.artForm.getRawValue();
-    const newArt: CreateArtDto = { name, genre, year: year ?? undefined };
+    const { name, genre, year, imageUrl } = this.artForm.getRawValue();
+
+    const newArt: CreateArtDto = {
+      name,
+      genre,
+      year: year ?? undefined,
+      imageUrl
+    };
+
 
     const id = this.id();
 
@@ -83,7 +110,12 @@ export class ArtForm implements OnInit {
 
     this.artService.getArtById(id).subscribe({
       next: (art) =>
-        this.artForm.patchValue({ name: art.name, genre: art.genre, year: art.year ?? null }),
+        this.artForm.patchValue({
+          name: art.name,
+          genre: art.genre,
+          year: art.year ?? null,
+          imageUrl: art.imageUrl ?? '',
+        }),
       error: (err: Error) => this.saveError.set(err.message),
     });
   }

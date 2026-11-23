@@ -1,0 +1,20 @@
+﻿.back-link { display: inline-block; margin-bottom: 1.5rem; }
+article {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  background: #fffcf7;
+  border: 1px solid #ded7ca;
+  border-radius: .4rem;
+  overflow: hidden;
+}
+
+.artwork { display: grid; place-items: center; min-height: 14rem; background: #ece5d8; color: #665d50; }
+img { display: block; width: 100%; max-height: 36rem; object-fit: contain; }
+.details { padding: clamp(1.25rem, 4vw, 3rem); align-self: center; overflow-wrap: anywhere; }
+h1 { font-size: clamp(2rem, 5vw, 4rem); }
+.metadata { margin-top: .65rem; color: #655c50; }
+.actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-block: 1.5rem .75rem; }
+
+@media (max-width: 42rem) {
+  article { grid-template-columns: 1fr; }
+}

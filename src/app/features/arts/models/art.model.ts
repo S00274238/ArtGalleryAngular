@@ -17,5 +17,6 @@ export interface UpdateArtDto {
   name: string;
   genre: string;
   year?: number;
+  imageUrl?: string;
 }
 

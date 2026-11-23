@@ -1,10 +1,13 @@
-<div class="art-block">
-    <h3>{{ art().name }} {{ art().genre }}</h3>
-
-    @if(art().year){ <p>Year: {{ art().year }}</p>}
-
-    <img src="{{art().imageUrl}}" alt="popa" width="200px" height="200px"><br>
-    <a [routerLink]="['/arts', art()._id]">View Profile</a>
-    
-
-</div>
+﻿<a class="art-card" [routerLink]="['/arts', art()._id]">
+  <div class="artwork">
+    @if (art().imageUrl; as imageUrl) {
+      <img [src]="imageUrl" alt="" loading="lazy" />
+    } @else {
+      <span>Image unavailable</span>
+    }
+  </div>
+  <div class="caption">
+    <h2>{{ art().name }}</h2>
+    <p>{{ art().genre }} @if (art().year) { <span>· {{ art().year }}</span> }</p>
+  </div>
+</a>

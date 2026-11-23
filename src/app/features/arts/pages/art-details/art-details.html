@@ -1,26 +1,33 @@
-<h2>Art Details</h2>
+﻿<section class="page">
+  <a class="back-link" routerLink="/arts">Back to collection</a>
 
-<p> Art Id is {{id()}}</p>
-
-@let s = state();
-@if (s.status === 'loading') {
-<p>Loading art details...</p>
-} @else if (s.status === 'error') {
-<p>{{ s.message }}</p>
-} @else {
-<h2>{{ s.data.name }} {{ s.data.genre }}</h2>
-@if (s.data.year) {
-<p>Year: {{ s.data.year }}</p>
-}
-<a matButton="filled" [routerLink]="['/arts', s.data._id, 'edit']">Edit</a>
-
-
-<button matButton="outlined" (click)="deleteArt(s.data)" [disabled]="deleting()">
-    Delete
-</button>
-@if (deleteError(); as message) {
-<p class="error">{{ message }}</p>
-
-}
-
-}
+  @let s = state();
+  @if (s.status === 'loading') {
+    <p class="status" role="status">Loading artwork…</p>
+  } @else if (s.status === 'error') {
+    <p class="status error" role="alert">{{ s.message }}</p>
+  } @else {
+    <article>
+      <div class="artwork">
+        @if (s.data.imageUrl; as imageUrl) {
+          <img [src]="imageUrl" [alt]="s.data.name" />
+        } @else {
+          <span>Image unavailable</span>
+        }
+      </div>
+      <div class="details">
+        <h1>{{ s.data.name }}</h1>
+        <p class="metadata">{{ s.data.genre }} @if (s.data.year) { <span>· {{ s.data.year }}</span> }</p>
+        <div class="actions">
+          <a class="action" [routerLink]="['/arts', s.data._id, 'edit']">Edit artwork</a>
+          <button class="action secondary" type="button" (click)="deleteArt(s.data)" [disabled]="deleting()">
+            {{ deleting() ? 'Deleting…' : 'Delete' }}
+          </button>
+        </div>
+        @if (deleteError(); as message) {
+          <p class="error" role="alert">{{ message }}</p>
+        }
+      </div>
+    </article>
+  }
+</section>

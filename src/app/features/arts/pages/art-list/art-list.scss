@@ -1,0 +1,15 @@
+﻿.gallery-heading {
+  background: #252721;
+  color: #fff9ed;
+  border-bottom: .35rem solid #a34933;
+}
+
+h1 { font-size: clamp(2.7rem, 8vw, 6.5rem); }
+.collection { padding-top: clamp(1.25rem, 4vw, 3rem); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  gap: clamp(1rem, 3vw, 2rem);
+  align-items: stretch;
+}

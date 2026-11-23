@@ -1,0 +1,21 @@
+﻿.site-header {
+  background: #fffcf7;
+  border-bottom: 1px solid #ded7ca;
+}
+
+nav {
+  max-width: 75rem;
+  margin-inline: auto;
+  padding: .85rem clamp(1.25rem, 5vw, 4rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand {
+  font: clamp(1.2rem, 3vw, 1.6rem) Georgia, serif;
+  text-decoration: none;
+}
+
+.brand:hover { text-decoration: underline; }

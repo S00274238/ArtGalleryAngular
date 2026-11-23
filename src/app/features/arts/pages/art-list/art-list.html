@@ -1,13 +1,15 @@
-<div class="art-list-container">
-  <h2>Art Gallery</h2>
+﻿<section class="gallery-heading">
+  <div class="page"><h1>The Collection</h1></div>
+</section>
 
+<section class="page collection" aria-label="Artworks">
   @let s = state();
   @if (s.status === 'loading') {
-    <p>Loading arts...</p>
+    <p class="status" role="status">Loading artworks…</p>
   } @else if (s.status === 'error') {
-    <p> {{ s.message }}</p>
+    <p class="status error" role="alert">{{ s.message }}</p>
   } @else if (s.data.length === 0) {
-    <p>No artss available at the moment.</p>
+    <p class="status">The collection is empty. Add an artwork to get started.</p>
   } @else {
     <div class="grid">
       @for (art of s.data; track art._id) {
@@ -15,4 +17,4 @@
       }
     </div>
   }
-</div>
+</section>

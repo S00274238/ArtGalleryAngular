@@ -1,38 +1,46 @@
-
-// Include theming for Angular Material with `mat.theme()`.
-// This Sass mixin will define CSS variables that are used for styling Angular Material
-// components according to the Material 3 design spec.
-// Learn more about theming and how to use it for your application's
-// custom components at https://material.angular.dev/guide/theming
-@use '@angular/material' as mat;
+﻿@use '@angular/material' as mat;
 
 html {
-  height: 100%;
   @include mat.theme((
-    color: (
-      primary: mat.$magenta-palette,
-      tertiary: mat.$violet-palette,
-    ),
-    typography: Roboto,
+    color: (primary: mat.$red-palette, tertiary: mat.$orange-palette),
+    typography: (plain-family: 'Segoe UI', brand-family: 'Segoe UI'),
     density: 0,
   ));
+  color-scheme: light;
 }
 
 body {
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
-  color-scheme: light;
-
-  // Set a default background, font and text colors for the application using
-  // Angular Material's system-level CSS variables. Learn more about these
-  // variables at https://material.angular.dev/guide/system-variables
-  background-color: rgb(206, 105, 206);
-  color: var(--mat-sys-on-surface);
-  font: var(--mat-sys-body-medium);
-
-  // Reset the user agent margin.
   margin: 0;
-  height: 100%;
+  background: #f6f3ed;
+  color: #25231f;
+  font: 1rem/1.55 'Segoe UI', sans-serif;
 }
-/* You can add global styles to this file, and also import other style files */
+
+* { box-sizing: border-box; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { font-family: Georgia, serif; font-weight: 400; line-height: 1.1; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid #b64c32; outline-offset: 4px; }
+
+.page { max-width: 75rem; margin-inline: auto; padding: clamp(1.25rem, 5vw, 4rem); }
+.action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: .55rem 1rem;
+  border: 1px solid transparent;
+  border-radius: .35rem;
+  background: #963c29;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+.action:hover { background: #763020; }
+.action.secondary { background: transparent; color: #25231f; border-color: #bfb8aa; }
+.action.secondary:hover { background: #eae4d9; }
+.action:disabled { opacity: .65; cursor: default; }
+.status { padding: 1.5rem; border: 1px solid #d8d0c3; background: #fffcf7; }
+.error { color: #8b3021; }

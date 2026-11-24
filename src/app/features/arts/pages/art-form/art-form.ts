@@ -11,6 +11,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { notBlank } from '../../../../shared/validators/not-blank.validator';
 import { forbiddenValue } from '../../../../shared/validators/forbiden-value';
+import { realImage } from '../../../../shared/validators/real-image';
 
 
 @Component({
@@ -32,14 +33,14 @@ export class ArtForm implements OnInit {
 
 
   readonly id = input<string>();  // note this is optional by default
-  
+
   readonly currentYear = new Date().getFullYear();
 
   artForm = this.formBuilder.nonNullable.group({
     name: ['', [Validators.required, Validators.minLength(2), notBlank, forbiddenValue]],
     genre: ['', [Validators.required, Validators.minLength(2), notBlank, forbiddenValue]],
     year: this.formBuilder.control<number | null>(null, [Validators.min(1950), Validators.max(this.currentYear + 1),]),
-    imageUrl: ['', Validators.required, notBlank]
+    imageUrl: ['', Validators.required, realImage]
   });
 
 
@@ -60,7 +61,7 @@ export class ArtForm implements OnInit {
   //     this.imageUrl = reader.result as string;
   //   };
 
-  //   reader.readAsDataURL(file);
+  
   // }
 
 
@@ -69,6 +70,7 @@ export class ArtForm implements OnInit {
 
     if (this.artForm.invalid) {
       this.artForm.markAllAsTouched();
+      this.saveError.set("Invalid Data")
       return;
     }
     const { name, genre, year, imageUrl } = this.artForm.getRawValue();

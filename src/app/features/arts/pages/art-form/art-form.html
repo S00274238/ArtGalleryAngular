@@ -54,17 +54,8 @@
 
         <mat-form-field>
             <mat-label>ImageUrl</mat-label>
-            <input matInput type="string" formControlName="imageUrl" placeholder="e.g. 2022" />
-            <mat-hint>Optional</mat-hint>
-            @if (artForm.controls.genre.hasError('blank')) {
-            <mat-error>Genre cannot be only spaces</mat-error>
-            }
+            <input matInput type="string" formControlName="imageUrl" placeholder="image.jpg" />
         </mat-form-field>
-
-
-
-
-
 
 
         <!-- Action Buttons -->
@@ -75,6 +66,8 @@
             </button>
             <a matButton routerLink="/arts">Cancel</a>
         </div>
+        
+        
 
     </form>
 </section>
